@@ -1,116 +1,130 @@
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Speler {
     private String naam;
-    private int huidigeKamer;
-    private String status;
-    private int scrumKennis;
-    private SpelerRepository repository;
-    private Set<Integer> bezochteKamers;
-    private List<VoortgangsMonitor> observers;
-
+    private SpelerStatus status;
+    private RepoManager persistence;
+    private SpelerObservable observable;
+    private JokerManager jokerManager;
+    private KamerTracker kamerTracker;
 
     public Speler(String naam) {
         this.naam = naam;
-        this.huidigeKamer = 0;
-        this.status = "Begonnen";
-        this.scrumKennis = 0;
-        this.repository = new SpelerRepository();
-        this.bezochteKamers = new HashSet<>();
-        this.bezochteKamers.add(0);
-        this.observers = new ArrayList<>();
+        this.status = new SpelerStatus();
+        this.status.setNaam(naam);
+        this.status.setScrumKennis(0);
+        this.status.setHuidigeKamer(0);
+        this.status.setAantalSleutels(0);
         
-        repository.saveSpeler(this);
+        this.persistence = new RepoManager();
+        this.observable = new SpelerObservable();
+        this.jokerManager = new JokerManager();
+        this.kamerTracker = new KamerTracker();
+        this.kamerTracker.voegKamerToe(naam, 0);
+        
+
+        this.persistence.saveSpelerStatus(this.status);
     }
 
     public void verplaats(int nieuwePositie) {
-        this.huidigeKamer = nieuwePositie;
+        this.status.setHuidigeKamer(nieuwePositie);
         
-        this.bezochteKamers.add(nieuwePositie);
+        this.kamerTracker.voegKamerToe(this.naam, nieuwePositie);
         
-        repository.updatePositie(this.naam, nieuwePositie);
+        this.persistence.updatePositie(this.naam, nieuwePositie);
         
-        notifyObservers();
+        this.observable.notifyObservers(this);
     }
     
     public boolean isKamerBezocht(int kamerNr) {
-        return this.bezochteKamers.contains(kamerNr);
+        return this.kamerTracker.isKamerBezocht(this.naam, kamerNr);
     }
-
 
     public int getHuidigeKamer() {
-        return this.huidigeKamer;
+        return this.status.getHuidigeKamer();
     }
-
 
     public String getStatus() {
-        return this.status;
+        return this.status.getStatus();
     }
-
 
     public String getNaam() {
-        return this.naam;
+        return this.status.getNaam();
     }
 
-
     public void verhoogScrumKennis(int aantal) {
-        this.scrumKennis += aantal;
-        System.out.println("Scrum kennis van " + naam + " verhoogd met " + aantal);
+        int newKennis = this.status.getScrumKennis() + aantal;
+        this.status.setScrumKennis(newKennis);
         
-        repository.updateScrumKennis(this.naam, this.scrumKennis);
+        System.out.println("Scrum kennis van " + this.naam + " verhoogd met " + aantal);
         
-        notifyObservers();
+        this.persistence.updateScrumKennis(this.naam, newKennis);
+        
+        this.observable.notifyObservers(this);
     }
     
     public void verlaagScrumKennis(int monsterLevenspunten) {
         int aftrek = monsterLevenspunten / 2;
-        this.scrumKennis = Math.max(0, this.scrumKennis - aftrek);
-        System.out.println("Fout antwoord! Scrum kennis van " + naam + " verlaagd met " + aftrek);
+        int newKennis = Math.max(0, this.status.getScrumKennis() - aftrek);
+        this.status.setScrumKennis(newKennis);
         
-        repository.updateScrumKennis(this.naam, this.scrumKennis);
+        System.out.println("Fout antwoord! Scrum kennis van " + this.naam + " verlaagd met " + aftrek);
         
-        notifyObservers();
+        this.persistence.updateScrumKennis(this.naam, newKennis);
+        
+        this.observable.notifyObservers(this);
     }
 
-
     public int getScrumKennis() {
-        return this.scrumKennis;
+        return this.status.getScrumKennis();
     }
 
     public void loadFromDatabase() {
-        this.huidigeKamer = repository.getHuidigeKamer(this.naam);
-        this.status = repository.getStatus(this.naam);
-        this.scrumKennis = repository.getScrumKennis(this.naam);
+        this.status = this.persistence.getSpelerStatus(this.naam);
         
-        if (this.bezochteKamers == null) {
-            this.bezochteKamers = new HashSet<>();
-        }
+        this.kamerTracker.voegKamerToe(this.naam, this.status.getHuidigeKamer());
         
-        this.bezochteKamers.add(this.huidigeKamer);
-        
-        notifyObservers();
+        this.observable.notifyObservers(this);
     }
-    
 
     public void registerObserver(VoortgangsMonitor observer) {
-        observers.add(observer);
+        this.observable.registerObserver(observer);
         observer.update(this);
     }
     
     public void removeObserver(VoortgangsMonitor observer) {
-        observers.remove(observer);
+        this.observable.removeObserver(observer);
     }
     
     public void notifyObservers() {
-        for (VoortgangsMonitor observer : observers) {
-            observer.update(this);
-        }
+        this.observable.notifyObservers(this);
     }
     
     public List<VoortgangsMonitor> getObservers() {
-        return observers;
+        return this.observable.getObservers();
+    }
+
+    public void setJoker(Joker joker) {
+        this.jokerManager.setJoker(joker);
+    }
+
+    public Joker getJoker() {
+        return this.jokerManager.getJoker();
+    }
+    
+    public boolean hasJoker() {
+        return this.jokerManager.hasJoker();
+    }
+
+    public void setAantalSleutels(int aantal) {
+        this.status.setAantalSleutels(aantal);
+    }
+
+    public int getAantalSleutels() {
+        return this.status.getAantalSleutels();
+    }
+    
+    public void clearBezochteKamers() {
+        this.persistence.clearBezochteKamers(this.naam);
     }
 }

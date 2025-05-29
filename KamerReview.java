@@ -1,9 +1,5 @@
-import java.util.Scanner;
-
 class KamerReview extends Kamer {
     private int reviewScore;
-    private VraagStrategie vraag;
-    private Monster monster;
 
     public KamerReview(String beschrijving, int reviewScore) {
         super(beschrijving);
@@ -29,6 +25,16 @@ class KamerReview extends Kamer {
     }
 
     @Override
+    void geefHint() {
+        System.out.println("Hint: De Sprint Review is bedoeld om de voltooide functionaliteiten te demonstreren en feedback te verzamelen van stakeholders.");
+    }
+
+    @Override
+    protected String getKamerNaam() {
+        return "Review Kamer";
+    }
+
+    @Override
     public void betreed() {
         System.out.println(KamerAsciiLayouts.getReviewLayout());
         System.out.println("Welkom in de Review Kamer!");
@@ -38,46 +44,11 @@ class KamerReview extends Kamer {
         System.out.println("\nEr verschijnt een " + monster.getNaam() + "!");
         System.out.println(monster.beschrijving());
         monster.aanval();
-        
+
         stelVraag();
     }
 
     public void toonReview() {
         System.out.println("Score: " + reviewScore);
-    }
-    
-    private void stelVraag() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\nOm de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
-        
-        vraag.toonVraag();
-        
-        System.out.print("\nJouw antwoord: ");
-        String antwoord = scanner.nextLine();
-        
-        boolean isCorrect = vraag.controleerAntwoord(antwoord);
-        if (isCorrect) {
-            System.out.println(vraag.positieveFeedback());
-            monster.versla(Spel.getHuidigeSpeler());
-        } else {
-            System.out.println(vraag.negatieveFeedback());
-            System.out.println("De " + monster.getNaam() + " valt opnieuw aan!");
-            
-            vraagOmHint();
-            
-            stelVraag();
-        }
-    }
-    
-    private void vraagOmHint() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Wil je een hint? (ja/nee): ");
-        String antwoord = scanner.nextLine().toLowerCase();
-        
-        if (antwoord.equals("ja") || antwoord.equals("j")) {
-            HintProvider hintProvider = HintFactory.createHintProvider(vraag);
-            
-            System.out.println("\nHINT: " + hintProvider.getHint() + "\n");
-        }
     }
 }

@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class KamerPlanning extends Kamer {
     private String planningDetails;
-    private VraagStrategie vraag;
-    private Monster monster;
 
     public KamerPlanning(String beschrijving, String planningDetails) {
         super(beschrijving);
@@ -42,6 +40,29 @@ public class KamerPlanning extends Kamer {
         );
     }
 
+    public void gebruikKamerInfo(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wil je meer informatie over deze kamer? (ja/nee)");
+        String antwoord = scanner.nextLine().toLowerCase();
+        if (antwoord.equals("ja") || antwoord.equals("j")) {
+            KamerInfo kamerInfo = new KamerInfo();
+            kamerInfo.showMessage("Dit is de planning kamer. Hier maak je de sprint planning." +
+                    " Zorg ervoor dat je de juiste taken selecteert voor de komende sprint.");
+        } else {
+            System.out.println("Oké, laten we verder gaan.");
+        }
+    }
+
+    @Override
+    void geefHint() {
+        System.out.println("Hint: De Sprint Planning is een meeting waarin het team bepaalt wat er in de komende sprint gedaan zal worden.");
+    }
+
+    @Override
+    protected String getKamerNaam() {
+        return "Planning Kamer";
+    }
+
     @Override
     public void betreed() {
         System.out.println(KamerAsciiLayouts.getPlanningLayout());
@@ -52,46 +73,11 @@ public class KamerPlanning extends Kamer {
         System.out.println("\nEr verschijnt een " + monster.getNaam() + "!");
         System.out.println(monster.beschrijving());
         monster.aanval();
-        
+        gebruikKamerInfo();
         stelVraag();
     }
 
     public void toonPlanning() {
         System.out.println(planningDetails);
-    }
-    
-    private void stelVraag() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\nOm de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
-        
-        vraag.toonVraag();
-        
-        System.out.print("\nJouw antwoord (bijv. '1=D'): ");
-        String antwoord = scanner.nextLine();
-        
-        boolean isCorrect = vraag.controleerAntwoord(antwoord);
-        if (isCorrect) {
-            System.out.println(vraag.positieveFeedback());
-            monster.versla(Spel.getHuidigeSpeler());
-        } else {
-            System.out.println(vraag.negatieveFeedback());
-            System.out.println("De " + monster.getNaam() + " valt opnieuw aan!");
-            
-            vraagOmHint();
-            
-            stelVraag();
-        }
-    }
-    
-    private void vraagOmHint() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Wil je een hint? (ja/nee): ");
-        String antwoord = scanner.nextLine().toLowerCase();
-        
-        if (antwoord.equals("ja") || antwoord.equals("j")) {
-            HintProvider hintProvider = HintFactory.createHintProvider(vraag);
-            
-            System.out.println("\nHINT: " + hintProvider.getHint() + "\n");
-        }
     }
 }

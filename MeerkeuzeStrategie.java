@@ -1,19 +1,30 @@
-public class MeerkeuzeStrategie implements VraagStrategie{
+public class MeerkeuzeStrategie implements VraagStrategie {
     private String positieveFeedback;
     private String negatieveFeedback;
     private String vraag;
     private String[] opties;
     private String correctAntwoord;
-    
-    public MeerkeuzeStrategie(String vraag, String[] opties, String correctAntwoord, 
-                             String positieveFeedback, String negatieveFeedback) {
+    private int correcteNrAntwoord;
+
+    public MeerkeuzeStrategie(String vraag, String[] opties, String correctAntwoord,
+                              String positieveFeedback, String negatieveFeedback) {
         this.vraag = vraag;
         this.opties = opties;
         this.correctAntwoord = correctAntwoord;
         this.positieveFeedback = positieveFeedback;
         this.negatieveFeedback = negatieveFeedback;
+        this.correcteNrAntwoord = bepaalCorrecteIndex();
     }
-    
+
+    private int bepaalCorrecteIndex() {
+        for (int i = 0; i < opties.length; i++) {
+            if (opties[i].equalsIgnoreCase(correctAntwoord)) {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+
     @Override
     public void toonVraag() {
         System.out.println(vraag);
@@ -24,7 +35,12 @@ public class MeerkeuzeStrategie implements VraagStrategie{
 
     @Override
     public boolean controleerAntwoord(String antwoord) {
-        return antwoord.equalsIgnoreCase(correctAntwoord);
+        try {
+            int keuze = Integer.parseInt(antwoord);
+            return keuze == correcteNrAntwoord;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override

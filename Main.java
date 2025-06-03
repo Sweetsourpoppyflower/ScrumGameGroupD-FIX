@@ -1,16 +1,16 @@
+
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        Spel spel = new Spel("Scrum Avonturen Spel");
-        
-       
-        ScrumKennisLogger scrumKennisLogger = new ScrumKennisLogger();
+        SpelInitiatie spelInitiatie = new SpelInitiatie();
+        Spel spel = spelInitiatie.initializeGame("Scrum Avonturen Spel");
         
         KamerBacklog backlogKamer = new KamerBacklog(
             "Dit is de backlog kamer waar je de product backlog beheert.",
             "Product backlog met geprioriteerde user stories."
         );
+
         spel.voegKamerToe(backlogKamer);
         KamerPlanning planningKamer = new KamerPlanning(
             "Dit is de planning kamer waar je de sprint planning doet.", 
@@ -35,13 +35,12 @@ public class Main {
             "Wat ging goed, wat kan beter, en wat gaan we anders doen?"
         );
         spel.voegKamerToe(retroKamer);
-        
-        // Maak de monitors aan en registreer ze bij het spel
-        KamerVoortgangsMonitor kamerMonitor = new KamerVoortgangsMonitor(5);
-        spel.setScrumKennisLogger(scrumKennisLogger);
-        spel.setKamerVoortgangsMonitor(kamerMonitor);
-        
-        // Start het spel
+
+        spel.initializeCommandoVerwerker();
         spel.start();
     }
+    // De main methode start het spel en voegt de verschillende kamers toe aan het spel.
+    // Het spel wordt geïnitialiseerd met de naam "Scrum Avonturen Spel" en de kamers worden toegevoegd aan het spel.
+    // De kamers bevatten specifieke informatie en vragen die relevant zijn voor het Scrum proces.
+    // De spel.start() methode start het spel en laat de speler door de verschillende kamers navigeren.
 }

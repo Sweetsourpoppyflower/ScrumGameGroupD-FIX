@@ -1,5 +1,4 @@
-public class Zombie implements Monster {
-    private int levenspunten;
+public class Zombie extends Monster {
 
     public Zombie() {
         this.levenspunten = 50;
@@ -16,19 +15,13 @@ public class Zombie implements Monster {
     }
 
     @Override
-    public int getLevenspunten() {
-        return levenspunten;
+    public String beschrijving() {
+        return "Een trage, rottende zombie die toch gevaarlijk dichtbij kan komen.";
     }
-
+    
     @Override
     public void versla(Speler speler) {
         System.out.println("De zombie is neergehaald.");
         speler.verhoogScrumKennis(levenspunten);
     }
-
-    @Override
-    public String beschrijving() {
-        return "Een trage, rottende zombie die toch gevaarlijk dichtbij kan komen.";
-    }
 }
-

@@ -1,5 +1,4 @@
-public class Draak implements Monster {
-    private int levenspunten;
+public class Draak extends Monster {
 
     public Draak() {
         this.levenspunten = 200;
@@ -13,17 +12,6 @@ public class Draak implements Monster {
     @Override
     public String getNaam() {
         return "Draak";
-    }
-
-    @Override
-    public int getLevenspunten() {
-        return levenspunten;
-    }
-
-    @Override
-    public void versla(Speler speler) {
-        System.out.println("Je hebt de draak verslagen!");
-        speler.verhoogScrumKennis(levenspunten);
     }
 
     @Override

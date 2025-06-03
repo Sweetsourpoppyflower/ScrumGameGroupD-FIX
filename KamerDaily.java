@@ -1,9 +1,5 @@
-import java.util.Scanner;
-
 public class KamerDaily extends Kamer {
     private String dailyDetails;
-    private VraagStrategie vraag;
-    private Monster monster;
 
     public KamerDaily(String beschrijving, String dailyDetails) {
         super(beschrijving);
@@ -29,6 +25,16 @@ public class KamerDaily extends Kamer {
     }
 
     @Override
+    void geefHint() {
+        System.out.println("Hint: De Daily Scrum is een korte dagelijkse meeting waarin teamleden elkaar op de hoogte houden van hun voortgang.");
+    }
+
+    @Override
+    protected String getKamerNaam() {
+        return "Daily Kamer";
+    }
+
+    @Override
     public void betreed() {
         System.out.println(KamerAsciiLayouts.getDailyLayout());
         System.out.println("Welkom in de Daily Kamer!");
@@ -44,40 +50,5 @@ public class KamerDaily extends Kamer {
 
     public void toonDaily() {
         System.out.println(dailyDetails);
-    }
-    
-    private void stelVraag() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\nOm de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
-        
-        vraag.toonVraag();
-        
-        System.out.print("\nJouw antwoord: ");
-        String antwoord = scanner.nextLine();
-        
-        boolean isCorrect = vraag.controleerAntwoord(antwoord);
-        if (isCorrect) {
-            System.out.println(vraag.positieveFeedback());
-            monster.versla(Spel.getHuidigeSpeler());
-        } else {
-            System.out.println(vraag.negatieveFeedback());
-            System.out.println("De " + monster.getNaam() + " valt opnieuw aan!");
-            
-            vraagOmHint();
-            
-            stelVraag();
-        }
-    }
-    
-    private void vraagOmHint() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Wil je een hint? (ja/nee): ");
-        String antwoord = scanner.nextLine().toLowerCase();
-        
-        if (antwoord.equals("ja") || antwoord.equals("j")) {
-            HintProvider hintProvider = HintFactory.createHintProvider(vraag);
-            
-            System.out.println("\nHINT: " + hintProvider.getHint() + "\n");
-        }
     }
 }

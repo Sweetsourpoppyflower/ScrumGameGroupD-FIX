@@ -1,6 +1,6 @@
-public abstract class Weapon {
+public interface Weapon {
 
-    void attack() {
+    default void attack() {
         System.out.println("Je valt het object aan.");
     }
 }

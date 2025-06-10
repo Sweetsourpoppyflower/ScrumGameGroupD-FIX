@@ -2,7 +2,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CommandoVerwerker {
-
+    Assistent assistent = new Assistent();
     private List<Kamer> kamers;
 
 
@@ -22,6 +22,9 @@ public class CommandoVerwerker {
         }
         else if (command.equals("joker")) {
             JokerSelector.verwerkJokerKeuze(speler);
+        }
+        else if (command.equals("assistent")) {
+            verwerkAssistentGebruik(speler);
         }
         else if (command.equals("stop")) {
             System.out.println("Bedankt voor het spelen!");
@@ -69,6 +72,15 @@ public class CommandoVerwerker {
     }
     // De verwerkStatus methode toont de huidige status van de speler, inclusief de huidige kamer en andere relevante informatie.
     // Het geeft ook informatie van alle voortgangsmonitors die aan de speler zijn gekoppeld.
+
+    private void verwerkAssistentGebruik(Speler speler) {
+        Kamer huidigeKamer = kamers.get(speler.getHuidigeKamer());
+        if (huidigeKamer.heeftAssistent()) {
+            assistent.activate(huidigeKamer, speler);
+        } else {
+            System.out.println("De assistent is niet beschikbaar in deze kamer.");
+        }
+    }
 
 
 

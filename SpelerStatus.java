@@ -4,6 +4,7 @@ public class SpelerStatus {
     private String status;
     private int scrumKennis;
     private int aantalSleutels;
+    private String educatiefHulpMiddel;
     private SpelerRepository spelerRepository;
 
     public void setNaam(String naam) {
@@ -44,5 +45,12 @@ public class SpelerStatus {
 
     public int getAantalSleutels() {
         return aantalSleutels;
+    }
+
+    public String getEducatiefHulpMiddel() {
+        return educatiefHulpMiddel;
+    }
+    public void setEducatiefHulpMiddel(String educatiefHulpMiddel) {
+        this.educatiefHulpMiddel = educatiefHulpMiddel;
     }
 }

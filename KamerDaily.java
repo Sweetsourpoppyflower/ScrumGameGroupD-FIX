@@ -1,4 +1,5 @@
 public class KamerDaily extends Kamer {
+    private Boolean heeftAssistent = false;
     private String dailyDetails;
 
     public KamerDaily(String beschrijving, String dailyDetails) {
@@ -50,5 +51,9 @@ public class KamerDaily extends Kamer {
 
     public void toonDaily() {
         System.out.println(dailyDetails);
+    }
+
+    public Boolean heeftAssistent() {
+        return heeftAssistent;
     }
 }

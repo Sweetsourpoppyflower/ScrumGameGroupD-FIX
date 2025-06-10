@@ -1,4 +1,6 @@
 class KamerReview extends Kamer {
+    private Boolean heeftAssistent = true;
+    private Assistent assistent;
     private int reviewScore;
 
     public KamerReview(String beschrijving, int reviewScore) {
@@ -6,6 +8,7 @@ class KamerReview extends Kamer {
         this.reviewScore = reviewScore;
         this.vraag = maakReviewVraag();
         this.monster = new Zombie();
+        this.assistent = new Assistent();
     }
     
     private VraagStrategie maakReviewVraag() {
@@ -50,5 +53,9 @@ class KamerReview extends Kamer {
 
     public void toonReview() {
         System.out.println("Score: " + reviewScore);
+    }
+
+    public Boolean heeftAssistent() {
+        return heeftAssistent;
     }
 }

@@ -1,4 +1,5 @@
 public class KamerRetro extends Kamer {
+    private Boolean heeftAssistent = false;
     private String retroDetails;
 
     public KamerRetro(String beschrijving, String retroDetails) {
@@ -52,5 +53,9 @@ public class KamerRetro extends Kamer {
 
     public void toonRetro() {
         System.out.println(retroDetails);
+    }
+
+    public Boolean heeftAssistent() {
+        return heeftAssistent;
     }
 }

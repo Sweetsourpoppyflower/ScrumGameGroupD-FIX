@@ -3,6 +3,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class KamerPlanning extends Kamer {
+    private Boolean heeftAssistent = true;
+    private Assistent assistent;
     private String planningDetails;
 
     public KamerPlanning(String beschrijving, String planningDetails) {
@@ -10,6 +12,7 @@ public class KamerPlanning extends Kamer {
         this.planningDetails = planningDetails;
         this.vraag = maakPlanningVraag();
         this.monster = new Reuzenspin();
+        this.assistent = new Assistent();
     }
     
     private VraagStrategie maakPlanningVraag() {
@@ -79,5 +82,9 @@ public class KamerPlanning extends Kamer {
 
     public void toonPlanning() {
         System.out.println(planningDetails);
+    }
+
+    public Boolean heeftAssistent() {
+        return heeftAssistent;
     }
 }

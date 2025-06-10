@@ -4,6 +4,7 @@ public abstract class Kamer implements JokerAcceptor {
     protected String beschrijving;
     protected VraagStrategie vraag;
     protected Monster monster;
+    protected Boolean heeftAssistent = false;
 
     public Kamer(String beschrijving) {
         this.beschrijving = beschrijving;
@@ -58,5 +59,9 @@ public abstract class Kamer implements JokerAcceptor {
     @Override
     public void accepteer(Joker joker) {
         joker.gebruikIn(this);
+    }
+
+    public Boolean heeftAssistent() {
+        return heeftAssistent;
     }
 }

@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class KamerBacklog extends Kamer {
+    private Boolean heeftAssistent = false;
     private String backlogDetails;
     private Zwaard zwaard = new Zwaard(50);
 
@@ -79,5 +80,9 @@ public class KamerBacklog extends Kamer {
         } else {
             System.out.println("Deze joker kan niet in deze kamer worden gebruikt.");
         }
+    }
+
+    public Boolean heeftAssistent() {
+        return heeftAssistent;
     }
 }

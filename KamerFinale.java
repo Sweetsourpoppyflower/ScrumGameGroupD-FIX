@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class KamerFinale extends Kamer {
-    private int poort = 1300;
+    private int poort = 1250;
     private List<VraagStrategie> vragen;
+    private Eindscherm eindscherm = new Eindscherm();
 
     public KamerFinale(String beschrijving) {
         super(beschrijving);
@@ -112,15 +113,17 @@ public class KamerFinale extends Kamer {
         }
     }
 
-    private void controleerWinst() {
+    private void controleerWinst() throws SQLException, InterruptedException {
         Speler speler = Spel.getHuidigeSpeler();
 
         if (speler.getScrumKennis() >= poort) {
             System.out.println("\nGefeliciteerd! Je hebt genoeg Scrum kennis (" + speler.getScrumKennis() +
                     " punten) om door de poort te gaan!");
+            Vertraag.inMilliseconden(400);
             System.out.println("Je hebt het spel gewonnen!");
-            // Einde van het spel
-            System.exit(0);
+            Vertraag.inMilliseconden(1000);
+
+            eindscherm.rolCredits();
         } else {
             System.out.println("\nJe hebt " + speler.getScrumKennis() + " Scrum kennis punten.");
             System.out.println("Je hebt minstens " + poort + " punten nodig om door de poort te gaan en te winnen.");
@@ -134,7 +137,7 @@ public class KamerFinale extends Kamer {
     }
 
     @Override
-    public void betreed() throws SQLException {
+    public void betreed() throws SQLException, InterruptedException {
         System.out.println(KamerAsciiLayouts.getFinaleLayout());
         System.out.println("Welkom in de Finale Kamer!");
         Vertraag.inMilliseconden(400);

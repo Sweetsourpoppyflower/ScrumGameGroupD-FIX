@@ -3,7 +3,7 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException, InterruptedException {
         SpelInitiatie spelInitiatie = new SpelInitiatie();
-        Spel spel = spelInitiatie.initializeGame("Scrum Avonturen Spel");
+        Spel spel = spelInitiatie.initializeGame("Scrum Excape Spel");
 
 
         KamerBacklog backlogKamer = new KamerBacklog(
@@ -43,5 +43,7 @@ public class Main {
 
         spel.initializeCommandoVerwerker();
         spel.start();
+
     }
+
 }

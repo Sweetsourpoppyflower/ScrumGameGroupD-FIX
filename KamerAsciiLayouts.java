@@ -173,4 +173,20 @@ public class KamerAsciiLayouts {
                         "│                                                     │\n" +
                         "└─────────────────────────────────────────────────────┘";
     }
+
+    public static String getEindschermLayout() {
+        return
+            "┌─────────────────────────────────────────────────────┐\n" +
+            "│                     EINDSCHERM                      │\n" +
+            "├─────────────────────────────────────────────────────┤\n" +
+            "│                                                     │\n" +
+            "│   Bedankt voor het spelen van ons Scrum Escape Spel! │\n" +
+            "│   We hopen dat je veel hebt geleerd over Scrum en   │\n" +
+            "│   dat je hebt genoten van het spel.                 │\n" +
+            "│                                                     │\n" +
+            "│   Voor vragen of feedback kun je contact opnemen     │\n" +
+            "│   met ons via email.                                │\n" +
+            "│                                                     │\n" +
+            "└─────────────────────────────────────────────────────┘";
+    }
 }

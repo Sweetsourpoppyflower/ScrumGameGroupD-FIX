@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public abstract class Kamer implements JokerAcceptor {
@@ -5,9 +6,14 @@ public abstract class Kamer implements JokerAcceptor {
     protected VraagStrategie vraag;
     protected Monster monster;
     protected Boolean heeftAssistent = false;
+    protected CommandoVerwerker commandoVerwerker;
 
     public Kamer(String beschrijving) {
         this.beschrijving = beschrijving;
+    }
+
+    public void setCommandoVerwerker(CommandoVerwerker commandoVerwerker) {
+        this.commandoVerwerker = commandoVerwerker;
     }
 
     abstract void geefHint();
@@ -17,33 +23,53 @@ public abstract class Kamer implements JokerAcceptor {
         speler.setAantalSleutels(speler.getAantalSleutels() + 1);
     }
 
-    public abstract void betreed();
+    public abstract void betreed() throws SQLException, InterruptedException;
     
     protected abstract String getKamerNaam();
-    
-    protected void stelVraag() {
+
+    protected void stelVraag() throws SQLException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("\nOm de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
-        
+        Vertraag.inMilliseconden(300);
         vraag.toonVraag();
-        
-        System.out.print("\nJouw antwoord: ");
-        String antwoord = scanner.nextLine();
-        
-        boolean isCorrect = vraag.controleerAntwoord(antwoord);
-        if (isCorrect) {
-            System.out.println(vraag.positieveFeedback());
-            monster.versla(Spel.getHuidigeSpeler());
-        } else {
-            System.out.println(vraag.negatieveFeedback());
-            System.out.println("De " + monster.getNaam() + " valt opnieuw aan!");
-            
-            vraagOmHint();
-            
-            stelVraag();
+        Vertraag.inMilliseconden(300);
+        System.out.println("\nJe kunt een commando invoeren of direct je antwoord geven.");
+
+        boolean isCorrect = false;
+        while (!isCorrect) {
+            System.out.print("\nJouw invoer: ");
+            String input = scanner.nextLine();
+
+            if (isCommando(input)) {
+                commandoVerwerker.verwerkCommand(input, Spel.getHuidigeSpeler());
+
+                System.out.println("\nOm de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
+                vraag.toonVraag();
+            } else {
+                isCorrect = vraag.controleerAntwoord(input);
+                if (isCorrect) {
+                    System.out.println(vraag.positieveFeedback());
+                    monster.versla(Spel.getHuidigeSpeler());
+                } else {
+                    System.out.println(vraag.negatieveFeedback());
+                    System.out.println("De " + monster.getNaam() + " valt opnieuw aan!");
+
+                    vraagOmHint();
+                }
+            }
         }
     }
-    
+
+    private boolean isCommando(String input) {
+        return input.equals("gebruik joker") ||
+                input.equals("status") ||
+                input.equals("joker") ||
+                input.equals("assistent") ||
+                input.equals("stop");
+    }
+
+
     protected void vraagOmHint() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Wil je een hint? (ja/nee): ");

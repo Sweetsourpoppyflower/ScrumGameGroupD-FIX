@@ -7,6 +7,7 @@ public class Draak extends Monster {
     @Override
     public void aanval() {
         System.out.println("🐉🐉🐉🐉🐉🐉 De draak spuugt vuur! 🐉🐉🐉🐉🐉🐉");
+        Vertraag.inMilliseconden(500);
     }
 
     @Override

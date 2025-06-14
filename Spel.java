@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Spel {
     private String spelNaam;
-    private List<Kamer> kamers;
+    public List<Kamer> kamers;
     private List<Speler> spelers;
     private GebruikersInvoerVerwerker invoerVerwerker;
     private CommandoVerwerker commandoVerwerker;
@@ -18,10 +18,19 @@ public class Spel {
         this.invoerVerwerker = new GebruikersInvoerVerwerker();
         this.commandoVerwerker = new CommandoVerwerker(kamers);
     }
-    
+
+    public List<Kamer> getKamers() {
+        return kamers;
+    }
+
 
     public void initializeCommandoVerwerker() {
         this.commandoVerwerker = new CommandoVerwerker(kamers);
+
+        // Pass the CommandoVerwerker to each Kamer
+        for (Kamer kamer : kamers) {
+            kamer.setCommandoVerwerker(commandoVerwerker);
+        }
     }
     // De initializeCommandoVerwerker methode initialiseert de CommandoVerwerker met de huidige kamers van het spel.
 
@@ -36,7 +45,7 @@ public class Spel {
     }
     // De setKamerVoortgangsMonitor methode stelt de KamerVoortgangsMonitor in die gebruikt wordt om de voortgang van de speler in kamers te monitoren.
     
-    public void start() throws SQLException {
+    public void start() throws SQLException, InterruptedException {
         System.out.println("Welkom bij " + spelNaam + "!");
         String naam = invoerVerwerker.getPlayerName();
 

@@ -1,3 +1,5 @@
+import java.sql.SQLException;
+
 public class KamerRetro extends Kamer {
     private Boolean heeftAssistent = false;
     private String retroDetails;
@@ -39,21 +41,24 @@ public class KamerRetro extends Kamer {
     }
 
     @Override
-    public void betreed() {
+    public void betreed() throws SQLException, InterruptedException {
         System.out.println(KamerAsciiLayouts.getRetroLayout());
         System.out.println("Welkom in de Retrospective Kamer!");
+        Vertraag.inMilliseconden(400);
         System.out.println(beschrijving);
+        Vertraag.inMilliseconden(400);
         System.out.println("Retro Details: " + retroDetails);
+        Vertraag.inMilliseconden(400);
         
         System.out.println("\nEr verschijnt een " + monster.getNaam() + "!");
+        Vertraag.inMilliseconden(400);
         System.out.println(monster.beschrijving());
+        Vertraag.inMilliseconden(400);
         monster.aanval();
+        Vertraag.inMilliseconden(300);
         stelVraag();
     }
 
-    public void toonRetro() {
-        System.out.println(retroDetails);
-    }
 
     public Boolean heeftAssistent() {
         return heeftAssistent;

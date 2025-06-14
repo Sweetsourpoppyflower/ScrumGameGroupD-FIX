@@ -1,3 +1,5 @@
+import java.sql.SQLException;
+
 class KamerReview extends Kamer {
     private Boolean heeftAssistent = true;
     private Assistent assistent;
@@ -38,15 +40,21 @@ class KamerReview extends Kamer {
     }
 
     @Override
-    public void betreed() {
+    public void betreed() throws SQLException, InterruptedException {
         System.out.println(KamerAsciiLayouts.getReviewLayout());
         System.out.println("Welkom in de Review Kamer!");
+        Vertraag.inMilliseconden(400);
         System.out.println(beschrijving);
+        Vertraag.inMilliseconden(400);
         System.out.println("Reviewscore: " + reviewScore);
+        Vertraag.inMilliseconden(400);
         
         System.out.println("\nEr verschijnt een " + monster.getNaam() + "!");
+        Vertraag.inMilliseconden(400);
         System.out.println(monster.beschrijving());
+        Vertraag.inMilliseconden(400);
         monster.aanval();
+        Vertraag.inMilliseconden(300);
 
         stelVraag();
     }

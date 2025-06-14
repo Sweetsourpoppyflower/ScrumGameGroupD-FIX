@@ -5,12 +5,11 @@ import java.sql.SQLException;
 
 public class SQLHelper {
 
-    @FunctionalInterface
+
     public interface SQLConsumer<T> {
         void accept(T t) throws SQLException;
     }
 
-    @FunctionalInterface
     public interface SQLFunction<T, R> {
         R apply(T t) throws SQLException;
     }
@@ -23,7 +22,7 @@ public class SQLHelper {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("SQL-fout bij update: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -39,7 +38,7 @@ public class SQLHelper {
             }
 
         } catch (SQLException e) {
-            System.out.println("SQL-fout bij select: " + e.getMessage());
+            System.out.println( e.getMessage());
         }
 
         return null;

@@ -10,7 +10,7 @@ public class CommandoVerwerker {
         this.kamers = kamers;
     }
 
-    public void verwerkCommand(String command, Speler speler) throws SQLException {
+    public void verwerkCommand(String command, Speler speler) throws SQLException, InterruptedException {
         if (command.startsWith("ga naar kamer")) {
             verwerkBeweging(command.split(" "), speler);
         }

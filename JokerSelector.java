@@ -12,10 +12,10 @@ public class JokerSelector {
     // Deze methode maakt een Joker object aan op basis van de opgegeven type string.
     // Het accepteert "hint" of "sleutel" als geldige types en retourneert het overeenkomstige Joker object.
 
-    public static void verwerkJokerKeuze(Speler speler) {
+    public static void verwerkJokerKeuze(Speler speler) throws InterruptedException {
         GebruikersInvoerVerwerker invoerVerwerker = new GebruikersInvoerVerwerker();
 
-        System.out.println("Wil je een HintJoker of een SleutelJoker? (hint/sleutel)");
+        System.out.println("\n\nWil je een HintJoker of een SleutelJoker? (hint/sleutel)");
         String jokerKeuze = invoerVerwerker.getJokerChoice().toLowerCase();
 
         if (speler.getJoker() != null) {

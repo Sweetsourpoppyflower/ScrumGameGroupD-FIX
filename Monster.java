@@ -12,6 +12,7 @@ public abstract class Monster {
     public void versla(Speler speler) {
         System.out.println("Je hebt de " + getNaam() + " verslagen!");
         speler.verhoogScrumKennis(levenspunten);
+        Vertraag.inSeconden(1);
     }
     
     public void ontvangSchade(int schade) {

@@ -9,9 +9,8 @@ public class DBconnectie {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Verbonden met de database.");
         } catch (SQLException e) {
-            System.out.println("Fout bij het verbinden met de database: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
         return connection;
     }

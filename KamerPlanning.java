@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -67,15 +68,21 @@ public class KamerPlanning extends Kamer {
     }
 
     @Override
-    public void betreed() {
+    public void betreed() throws SQLException, InterruptedException {
         System.out.println(KamerAsciiLayouts.getPlanningLayout());
         System.out.println("Welkom in de Planning Kamer!");
+        Vertraag.inMilliseconden(400);
         System.out.println(beschrijving);
+        Vertraag.inMilliseconden(400);
         System.out.println("Planning Details: " + planningDetails);
+        Vertraag.inMilliseconden(400);
         
         System.out.println("\nEr verschijnt een " + monster.getNaam() + "!");
+        Vertraag.inMilliseconden(400);
         System.out.println(monster.beschrijving());
+        Vertraag.inMilliseconden(400);
         monster.aanval();
+        Vertraag.inMilliseconden(300);
         gebruikKamerInfo();
         stelVraag();
     }

@@ -31,5 +31,5 @@ public abstract class Joker {
         this.isUsed = used;
     }
     
-    public abstract String beschrijving();
+    public abstract String beschrijving() throws InterruptedException;
 }

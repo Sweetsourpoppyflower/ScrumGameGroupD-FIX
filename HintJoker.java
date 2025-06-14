@@ -11,7 +11,9 @@ public class HintJoker extends Joker {
     }
 
     @Override
-    public String beschrijving() {
-        return "Dit is een hint joker. Je kan deze joker gebruiken om hints te krijgen voor de vragen in de kamers.";
+    public String beschrijving() throws InterruptedException {
+        System.out.println("Dit is een hint joker. Je kan deze joker gebruiken om hints te krijgen voor de vragen in de kamers.");
+        Thread.sleep(2000);
+        return "";
     }
 }

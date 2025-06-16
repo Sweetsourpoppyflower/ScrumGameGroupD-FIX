@@ -19,7 +19,7 @@ public abstract class Kamer implements JokerAcceptor {
     abstract void geefHint();
 
     void geefExtraSleutel(Speler speler) {
-        System.out.println("Je hebt een extra sleutel gevonden in de " + getKamerNaam() + "!");
+        System.out.println("🔑 Je hebt een extra sleutel gevonden in de " + getKamerNaam() + "!");
         speler.setAantalSleutels(speler.getAantalSleutels() + 1);
     }
 
@@ -30,11 +30,11 @@ public abstract class Kamer implements JokerAcceptor {
     protected void stelVraag() throws SQLException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\nOm de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
+        System.out.println("\n❓ Om de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
         Vertraag.inMilliseconden(300);
         vraag.toonVraag();
         Vertraag.inMilliseconden(300);
-        System.out.println("\nJe kunt een commando invoeren of direct je antwoord geven.");
+        System.out.println("\n⌨️ Je kunt een commando invoeren of direct je antwoord geven.");
 
         boolean isCorrect = false;
         while (!isCorrect) {
@@ -44,7 +44,7 @@ public abstract class Kamer implements JokerAcceptor {
             if (isCommando(input)) {
                 commandoVerwerker.verwerkCommand(input, Spel.getHuidigeSpeler());
 
-                System.out.println("\nOm de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
+                System.out.println("\n❓ Om de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
                 vraag.toonVraag();
             } else {
                 isCorrect = vraag.controleerAntwoord(input);
@@ -53,7 +53,7 @@ public abstract class Kamer implements JokerAcceptor {
                     monster.versla(Spel.getHuidigeSpeler());
                 } else {
                     System.out.println(vraag.negatieveFeedback());
-                    System.out.println("De " + monster.getNaam() + " valt opnieuw aan!");
+                    System.out.println("⚔️ De " + monster.getNaam() + " valt opnieuw aan!");
 
                     vraagOmHint();
                 }
@@ -72,13 +72,13 @@ public abstract class Kamer implements JokerAcceptor {
 
     protected void vraagOmHint() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Wil je een hint? (ja/nee): ");
+        System.out.print("💡 Wil je een hint? (ja/nee): ");
         String antwoord = scanner.nextLine().toLowerCase();
         
         if (antwoord.equals("ja") || antwoord.equals("j")) {
             HintProvider hintProvider = HintFactory.createHintProvider(vraag);
             
-            System.out.println("\nHINT: " + hintProvider.getHint() + "\n");
+            System.out.println("\n💡 HINT: " + hintProvider.getHint() + "\n");
         }
     }
     

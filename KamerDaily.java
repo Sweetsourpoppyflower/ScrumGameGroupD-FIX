@@ -29,7 +29,7 @@ public class KamerDaily extends Kamer {
 
     @Override
     void geefHint() {
-        System.out.println("Hint: De Daily Scrum is een korte dagelijkse meeting waarin teamleden elkaar op de hoogte houden van hun voortgang.");
+        System.out.println("💡 Hint: De Daily Scrum is een korte dagelijkse meeting voor het Development Team om voortgang te bespreken.");
     }
 
     @Override
@@ -40,14 +40,14 @@ public class KamerDaily extends Kamer {
     @Override
     public void betreed() throws SQLException, InterruptedException {
         System.out.println(KamerAsciiLayouts.getDailyLayout());
-        System.out.println("Welkom in de Daily Kamer!");
+        System.out.println("👋 Welkom in de Daily Kamer!");
         Vertraag.inMilliseconden(400);
         System.out.println(beschrijving);
         Vertraag.inMilliseconden(400);
         System.out.println("Daily Details: " + dailyDetails);
         Vertraag.inMilliseconden(400);
         
-        System.out.println("\nEr verschijnt een " + monster.getNaam() + "!");
+        System.out.println("\n🧟 Er verschijnt een " + monster.getNaam() + "!");
         Vertraag.inMilliseconden(400);
         System.out.println(monster.beschrijving());
         Vertraag.inMilliseconden(400);
@@ -58,7 +58,7 @@ public class KamerDaily extends Kamer {
     }
 
     public void toonDaily() {
-        System.out.println(dailyDetails);
+        System.out.println("📅 " + dailyDetails);
     }
 
     public Boolean heeftAssistent() {

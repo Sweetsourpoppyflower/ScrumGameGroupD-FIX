@@ -31,7 +31,7 @@ class KamerReview extends Kamer {
 
     @Override
     void geefHint() {
-        System.out.println("Hint: De Sprint Review is bedoeld om de voltooide functionaliteiten te demonstreren en feedback te verzamelen van stakeholders.");
+        System.out.println("💡 Hint: De Sprint Review is bedoeld om de voltooide functionaliteiten te demonstreren en feedback te verzamelen van stakeholders.");
     }
 
     @Override
@@ -42,14 +42,14 @@ class KamerReview extends Kamer {
     @Override
     public void betreed() throws SQLException, InterruptedException {
         System.out.println(KamerAsciiLayouts.getReviewLayout());
-        System.out.println("Welkom in de Review Kamer!");
+        System.out.println("👋 Welkom in de Review Kamer!");
         Vertraag.inMilliseconden(400);
         System.out.println(beschrijving);
         Vertraag.inMilliseconden(400);
-        System.out.println("Reviewscore: " + reviewScore);
+        System.out.println("⭐ Reviewscore: " + reviewScore);
         Vertraag.inMilliseconden(400);
         
-        System.out.println("\nEr verschijnt een " + monster.getNaam() + "!");
+        System.out.println("\n🧟 Er verschijnt een " + monster.getNaam() + "!");
         Vertraag.inMilliseconden(400);
         System.out.println(monster.beschrijving());
         Vertraag.inMilliseconden(400);
@@ -60,7 +60,7 @@ class KamerReview extends Kamer {
     }
 
     public void toonReview() {
-        System.out.println("Score: " + reviewScore);
+        System.out.println("⭐ Score: " + reviewScore);
     }
 
     public Boolean heeftAssistent() {

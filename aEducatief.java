@@ -23,6 +23,6 @@ public class aEducatief implements AssistentActie {
         int randomIndex = random.nextInt(educatieveInformatie.size());
         String educatieveInfo = educatieveInformatie.get(randomIndex);
         status.setEducatiefHulpMiddel(educatieveInfo);
-        System.out.println("Je hebt een educatief hulp middel ontvangen!");
+        System.out.println("📚 Je hebt een educatief hulp middel ontvangen!");
     }
 }

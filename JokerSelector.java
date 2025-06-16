@@ -15,11 +15,11 @@ public class JokerSelector {
     public static void verwerkJokerKeuze(Speler speler) throws InterruptedException {
         GebruikersInvoerVerwerker invoerVerwerker = new GebruikersInvoerVerwerker();
 
-        System.out.println("\n\nWil je een HintJoker of een SleutelJoker? (hint/sleutel)");
+        System.out.println("\n\n🃏 Wil je een HintJoker of een SleutelJoker? (hint/sleutel)");
         String jokerKeuze = invoerVerwerker.getJokerChoice().toLowerCase();
 
         if (speler.getJoker() != null) {
-            System.out.println("Je hebt al een joker toegewezen gekregen.");
+            System.out.println("ℹ️ Je hebt al een joker toegewezen gekregen.");
             return;
         }
 
@@ -27,9 +27,9 @@ public class JokerSelector {
         if (joker != null) {
             speler.setJoker(joker);
             System.out.println(speler.getJoker().beschrijving());
-            System.out.println("Je kunt de joker later gebruiken met het commando 'gebruik joker'.");
+            System.out.println("⌨️ Je kunt de joker later gebruiken met het commando 'gebruik joker'.");
         } else {
-            System.out.println("Ongeldige keuze, geen joker toegewezen.");
+            System.out.println("⚠️ Ongeldige keuze, geen joker toegewezen.");
         }
     }
     // Deze methode verwerkt de keuze van de speler voor een joker.

@@ -27,11 +27,11 @@ public class CommandoVerwerker {
             verwerkAssistentGebruik(speler);
         }
         else if (command.equals("stop")) {
-            System.out.println("Bedankt voor het spelen!");
+            System.out.println("👋 Bedankt voor het spelen!");
             System.exit(0);
         }
         else {
-            System.out.println("Onbekend commando. Typ 'status' of 'ga naar kamer X'.");
+            System.out.println("⚠️ Onbekend commando. Typ 'status' of 'ga naar kamer X'.");
         }
     }
     // De verwerkCommand methode verwerkt de ingevoerde commando's van de speler.
@@ -43,9 +43,9 @@ public class CommandoVerwerker {
         int kamerNr = Integer.parseInt(delen[delen.length - 1]);
         if (kamerNr >= 0 && kamerNr < kamers.size()) {
             speler.verplaats(kamerNr);
-            System.out.println("Je bent verplaatst naar kamer " + kamerNr);
+            System.out.println("🚶 Je bent verplaatst naar kamer " + kamerNr);
         } else {
-            System.out.println("Ongeldige kamer.");
+            System.out.println("⚠️ Ongeldige kamer.");
         }
     }
     // De verwerkBeweging methode verwerkt de beweging van de speler naar een specifieke kamer.
@@ -56,15 +56,15 @@ public class CommandoVerwerker {
         if (joker != null) {
             joker.gebruikIn(kamers.get(speler.getHuidigeKamer()));
         } else {
-            System.out.println("Je hebt geen joker.");
+            System.out.println("⚠️ Je hebt geen joker.");
         }
     }
     // De verwerkJokerGebruik methode verwerkt het gebruik van een joker door de speler.
 
 
     private void verwerkStatus(Speler speler) {
-        System.out.println("Je bent nu in kamer: " + speler.getHuidigeKamer());
-        System.out.println("Status: " + speler.getStatus());
+        System.out.println("📍 Je bent nu in kamer: " + speler.getHuidigeKamer());
+        System.out.println("ℹ️ Status: " + speler.getStatus());
 
         for (VoortgangsMonitor monitor : speler.getObservers()) {
             System.out.println(monitor.getVoortgangsInfo());
@@ -78,7 +78,7 @@ public class CommandoVerwerker {
         if (huidigeKamer.heeftAssistent()) {
             assistent.activate(huidigeKamer, speler);
         } else {
-            System.out.println("De assistent is niet beschikbaar in deze kamer.");
+            System.out.println("⚠️ De assistent is niet beschikbaar in deze kamer.");
         }
     }
 

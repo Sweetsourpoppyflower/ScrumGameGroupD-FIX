@@ -9,11 +9,11 @@ public class SleutelJoker extends Joker {
         System.out.println("🔑 Sleutel Joker geactiveerd!");
         Speler speler = Spel.getHuidigeSpeler();
         kamer.geefExtraSleutel(speler);
-        System.out.println("Je hebt nu " + speler.getAantalSleutels() + " sleutels.");
+        System.out.println("🔑 Je hebt nu " + speler.getAantalSleutels() + " sleutels.");
     }
 
     @Override
     public String beschrijving() {
-        return "Dit is een Sleutel Joker. Je kan deze joker gebruiken om een extra sleutel te krijgen in de Daily Scrum of Review kamer.";
+        return "🔑 Dit is een Sleutel Joker. Je kan deze joker gebruiken om een extra sleutel te krijgen in de Daily Scrum of Review kamer.";
     }
 }

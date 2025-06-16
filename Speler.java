@@ -71,7 +71,7 @@ public class Speler {
         int newKennis = this.status.getScrumKennis() + aantal;
         this.status.setScrumKennis(newKennis);
         
-        System.out.println("Scrum kennis van " + this.naam + " verhoogd met " + aantal);
+        System.out.println("⬆️ Scrum kennis van " + this.naam + " verhoogd met " + aantal);
         
         this.persistence.updateScrumKennis(this.naam, newKennis);
         
@@ -87,7 +87,7 @@ public class Speler {
         int newKennis = Math.max(0, this.status.getScrumKennis() - aftrek);
         this.status.setScrumKennis(newKennis);
         
-        System.out.println("Fout antwoord! Scrum kennis van " + this.naam + " verlaagd met " + aftrek);
+        System.out.println("⬇️ Fout antwoord! Scrum kennis van " + this.naam + " verlaagd met " + aftrek);
         
         this.persistence.updateScrumKennis(this.naam, newKennis);
         

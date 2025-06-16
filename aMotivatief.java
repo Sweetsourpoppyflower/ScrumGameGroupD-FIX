@@ -18,6 +18,6 @@ public class aMotivatief implements AssistentActie {
     @Override
     public void voerUit(Kamer kamer, Speler speler) {
         String booschap = motivationalMessages.get(random.nextInt(motivationalMessages.size()));
-        System.out.println("\n" + booschap);
+        System.out.println("\n🌟 " + booschap);
     }
 }

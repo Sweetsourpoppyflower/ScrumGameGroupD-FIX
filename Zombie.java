@@ -21,7 +21,7 @@ public class Zombie extends Monster {
     
     @Override
     public void versla(Speler speler) {
-        System.out.println("De zombie is neergehaald.");
+        System.out.println("🧟‍♂️💀 De zombie is neergehaald.");
         speler.verhoogScrumKennis(levenspunten);
     }
 }

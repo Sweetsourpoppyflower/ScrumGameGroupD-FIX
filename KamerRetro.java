@@ -32,7 +32,7 @@ public class KamerRetro extends Kamer {
 
     @Override
     void geefHint() {
-        System.out.println("Hint: De Sprint Retrospective is bedoeld om het werkproces van het team te verbeteren.");
+        System.out.println("💡 Hint: De Sprint Retrospective is bedoeld om het werkproces van het team te verbeteren.");
     }
 
     @Override
@@ -43,14 +43,14 @@ public class KamerRetro extends Kamer {
     @Override
     public void betreed() throws SQLException, InterruptedException {
         System.out.println(KamerAsciiLayouts.getRetroLayout());
-        System.out.println("Welkom in de Retrospective Kamer!");
+        System.out.println("👋 Welkom in de Retrospective Kamer!");
         Vertraag.inMilliseconden(400);
         System.out.println(beschrijving);
         Vertraag.inMilliseconden(400);
-        System.out.println("Retro Details: " + retroDetails);
+        System.out.println("🔄 Retro Details: " + retroDetails);
         Vertraag.inMilliseconden(400);
         
-        System.out.println("\nEr verschijnt een " + monster.getNaam() + "!");
+        System.out.println("\n🐉 Er verschijnt een " + monster.getNaam() + "!");
         Vertraag.inMilliseconden(400);
         System.out.println(monster.beschrijving());
         Vertraag.inMilliseconden(400);

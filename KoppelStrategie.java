@@ -22,17 +22,49 @@ public class KoppelStrategie implements VraagStrategie {
 
     @Override
     public boolean controleerAntwoord(String antwoord) {
-        // Format expected: "key=value"
-        String[] parts = antwoord.split("=", 2);
-        if (parts.length != 2) {
+        if (antwoord == null || antwoord.trim().isEmpty()) {
             return false;
         }
         
-        String key = parts[0].trim();
-        String value = parts[1].trim();
+        String[] pairs = antwoord.split(",");
         
-        String correctValue = correcteAntwoorden.get(key);
-        return correctValue != null && correctValue.equalsIgnoreCase(value);
+        if (pairs.length != correcteAntwoorden.size()) {
+            return false;
+        }
+        
+        for (String pair : pairs) {
+            String[] parts = pair.trim().split("=", 2);
+            if (parts.length != 2) {
+                return false;
+            }
+            
+            String key = parts[0].trim();
+            String value = parts[1].trim();
+            
+            boolean isCorrect = false;
+            
+            // Check if key->value is correct (term=definition)
+            String correctValue = correcteAntwoorden.get(key);
+            if (correctValue != null && correctValue.equalsIgnoreCase(value)) {
+                isCorrect = true;
+            }
+            
+            // Check if value->key is correct (definition=term)
+            if (!isCorrect) {
+                for (Map.Entry<String, String> entry : correcteAntwoorden.entrySet()) {
+                    if (entry.getValue().equalsIgnoreCase(key) && entry.getKey().equalsIgnoreCase(value)) {
+                        isCorrect = true;
+                        break;
+                    }
+                }
+            }
+            
+            if (!isCorrect) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     @Override

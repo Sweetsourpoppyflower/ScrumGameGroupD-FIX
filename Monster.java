@@ -10,18 +10,18 @@ public abstract class Monster {
     }
     
     public void versla(Speler speler) {
-        System.out.println("Je hebt de " + getNaam() + " verslagen!");
+        System.out.println("💪 Je hebt de " + getNaam() + " verslagen!");
         speler.verhoogScrumKennis(levenspunten);
         Vertraag.inSeconden(1);
     }
     
     public void ontvangSchade(int schade) {
         levenspunten -= schade;
-        System.out.println("De " + getNaam() + " ontvangt " + schade + " schade. Levenspunten: " + levenspunten);
+        System.out.println("💥 De " + getNaam() + " ontvangt " + schade + " schade. Levenspunten: " + levenspunten);
         if (levenspunten <= 0) {
-            System.out.println("De " + getNaam() + " is verslagen!");
+            System.out.println("💀 De " + getNaam() + " is verslagen!");
         } else {
-            System.out.println("De " + getNaam() + " is nog steeds in leven met " + levenspunten + " levenspunten.");
+            System.out.println("❤️ De " + getNaam() + " is nog steeds in leven met " + levenspunten + " levenspunten.");
         }
     }
 }

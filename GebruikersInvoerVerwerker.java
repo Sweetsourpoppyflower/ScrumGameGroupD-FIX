@@ -7,7 +7,7 @@ public class GebruikersInvoerVerwerker {
         if (scanner == null) {
             scanner = new Scanner(System.in);
         }
-        System.out.print("Voer je naam in: ");
+        System.out.print("👤 Voer je naam in: ");
         return scanner.nextLine();
     }
     // De getPlayerName methode vraagt de gebruiker om zijn naam in te voeren en retourneert deze als een String.
@@ -27,7 +27,7 @@ public class GebruikersInvoerVerwerker {
         if (scanner == null) {
             scanner = new Scanner(System.in);
         }
-        System.out.print("Kies een joker (hint/sleutel): ");
+        System.out.print("🃏 Kies een joker (hint/sleutel): ");
         return scanner.nextLine();
     }
 }

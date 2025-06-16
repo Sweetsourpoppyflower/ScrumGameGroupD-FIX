@@ -15,9 +15,10 @@ public class KamerPlanning extends Kamer {
         this.monster = new Reuzenspin();
         this.assistent = new Assistent();
     }
-    
+
     private VraagStrategie maakPlanningVraag() {
-        String vraag = "Koppel de juiste termen aan elkaar door het antwoord in het formaat 'term=definitie' te geven:\n" +
+        String vraag = "Koppel de juiste termen aan elkaar door het antwoord in het formaat 'term=definitie' of 'definitie=term' te geven.\n" +
+                       "Geef alle antwoorden op één regel, gescheiden door komma's (bijv. '1=D, 2=A, 3=B, 4=E, 5=C' of 'A=2, B=3, C=5, D=1, E=4'):\n" +
                        "1. Sprint Planning\n" +
                        "2. Story Points\n" +
                        "3. Definition of Done\n" +
@@ -35,6 +36,7 @@ public class KamerPlanning extends Kamer {
         correcteAntwoorden.put("3", "B");
         correcteAntwoorden.put("4", "E");
         correcteAntwoorden.put("5", "C");
+
         
         return new KoppelStrategie(
             vraag, 
@@ -46,20 +48,20 @@ public class KamerPlanning extends Kamer {
 
     public void gebruikKamerInfo(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Wil je meer informatie over deze kamer? (ja/nee)");
+        System.out.println("❓ Wil je meer informatie over deze kamer? (ja/nee)");
         String antwoord = scanner.nextLine().toLowerCase();
         if (antwoord.equals("ja") || antwoord.equals("j")) {
             KamerInfo kamerInfo = new KamerInfo();
             kamerInfo.showMessage("Dit is de planning kamer. Hier maak je de sprint planning." +
                     " Zorg ervoor dat je de juiste taken selecteert voor de komende sprint.");
         } else {
-            System.out.println("Oké, laten we verder gaan.");
+            System.out.println("👍 Oké, laten we verder gaan.");
         }
     }
 
     @Override
     void geefHint() {
-        System.out.println("Hint: De Sprint Planning is een meeting waarin het team bepaalt wat er in de komende sprint gedaan zal worden.");
+        System.out.println("💡 Hint: De Sprint Planning is een meeting waarin het team bepaalt wat er in de komende sprint gedaan zal worden.");
     }
 
     @Override
@@ -70,14 +72,13 @@ public class KamerPlanning extends Kamer {
     @Override
     public void betreed() throws SQLException, InterruptedException {
         System.out.println(KamerAsciiLayouts.getPlanningLayout());
-        System.out.println("Welkom in de Planning Kamer!");
+        System.out.println("👋 Welkom in de Planning Kamer!");
         Vertraag.inMilliseconden(400);
         System.out.println(beschrijving);
         Vertraag.inMilliseconden(400);
-        System.out.println("Planning Details: " + planningDetails);
+        System.out.println("📋 Planning Details: " + planningDetails);
         Vertraag.inMilliseconden(400);
-        
-        System.out.println("\nEr verschijnt een " + monster.getNaam() + "!");
+        System.out.println("\n🕷️ Er verschijnt een " + monster.getNaam() + "!");
         Vertraag.inMilliseconden(400);
         System.out.println(monster.beschrijving());
         Vertraag.inMilliseconden(400);
@@ -88,7 +89,7 @@ public class KamerPlanning extends Kamer {
     }
 
     public void toonPlanning() {
-        System.out.println(planningDetails);
+        System.out.println("📋 " + planningDetails);
     }
 
     public Boolean heeftAssistent() {

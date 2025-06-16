@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class KamerFinale extends Kamer {
-    private int poort = 1250;
+    private int poort = 0;
     private List<VraagStrategie> vragen;
     private Eindscherm eindscherm = new Eindscherm();
 
@@ -95,7 +95,7 @@ public class KamerFinale extends Kamer {
 
         for (int i = 0; i < vragen.size(); i++) {
             VraagStrategie vraag = vragen.get(i);
-            System.out.println("\nVraag " + (i+1) + " van " + vragen.size() + ":");
+            System.out.println("\n❓ Vraag " + (i+1) + " van " + vragen.size() + ":");
             vraag.toonVraag();
 
             System.out.print("\nJouw antwoord: ");
@@ -104,11 +104,11 @@ public class KamerFinale extends Kamer {
             if (vraag.controleerAntwoord(antwoord)) {
                 System.out.println(vraag.positieveFeedback());
                 speler.verhoogScrumKennis(200);
-                System.out.println("Je krijgt 200 Scrum kennis punten! Totaal: " + speler.getScrumKennis());
+                System.out.println("⬆️ Je krijgt 200 Scrum kennis punten! Totaal: " + speler.getScrumKennis());
             } else {
                 System.out.println(vraag.negatieveFeedback());
                 speler.verhoogScrumKennis(-50);
-                System.out.println("Je verliest 50 Scrum kennis punten. Totaal: " + speler.getScrumKennis());
+                System.out.println("⬇️ Je verliest 50 Scrum kennis punten. Totaal: " + speler.getScrumKennis());
             }
         }
     }
@@ -117,39 +117,39 @@ public class KamerFinale extends Kamer {
         Speler speler = Spel.getHuidigeSpeler();
 
         if (speler.getScrumKennis() >= poort) {
-            System.out.println("\nGefeliciteerd! Je hebt genoeg Scrum kennis (" + speler.getScrumKennis() +
+            System.out.println("\n🎉 Gefeliciteerd! Je hebt genoeg Scrum kennis (" + speler.getScrumKennis() +
                     " punten) om door de poort te gaan!");
             Vertraag.inMilliseconden(400);
-            System.out.println("Je hebt het spel gewonnen!");
+            System.out.println("🏆 Je hebt het spel gewonnen!");
             Vertraag.inMilliseconden(1000);
 
             eindscherm.rolCredits();
         } else {
-            System.out.println("\nJe hebt " + speler.getScrumKennis() + " Scrum kennis punten.");
-            System.out.println("Je hebt minstens " + poort + " punten nodig om door de poort te gaan en te winnen.");
-            System.out.println("Nog " + (poort - speler.getScrumKennis()) + " punten te gaan!");
+            System.out.println("\n🧠 Je hebt " + speler.getScrumKennis() + " Scrum kennis punten.");
+            System.out.println("🚪 Je hebt minstens " + poort + " punten nodig om door de poort te gaan en te winnen.");
+            System.out.println("🎯 Nog " + (poort - speler.getScrumKennis()) + " punten te gaan!");
         }
     }
 
     @Override
     void geefHint() {
-        System.out.println("Hint: Beantwoord de vragen correct om Scrum kennis punten te verdienen.");
+        System.out.println("💡 Hint: Beantwoord de vragen correct om Scrum kennis punten te verdienen.");
     }
 
     @Override
     public void betreed() throws SQLException, InterruptedException {
         System.out.println(KamerAsciiLayouts.getFinaleLayout());
-        System.out.println("Welkom in de Finale Kamer!");
+        System.out.println("👋 Welkom in de Finale Kamer!");
         Vertraag.inMilliseconden(400);
         System.out.println(beschrijving);
         Vertraag.inMilliseconden(400);
-        System.out.println("\nDit is je laatste uitdaging. Beantwoord 5 vragen over Scrum.");
+        System.out.println("\n🏁 Dit is je laatste uitdaging. Beantwoord 5 vragen over Scrum.");
         Vertraag.inMilliseconden(400);
-        System.out.println("Voor elk correct antwoord krijg je 200 Scrum kennis punten.");
+        System.out.println("✅ Voor elk correct antwoord krijg je 200 Scrum kennis punten.");
         Vertraag.inMilliseconden(400);
-        System.out.println("Voor elk fout antwoord verlies je 50 Scrum kennis punten.");
+        System.out.println("❌ Voor elk fout antwoord verlies je 50 Scrum kennis punten.");
         Vertraag.inMilliseconden(400);
-        System.out.println("Je hebt " + poort + " Scrum kennis punten nodig om te winnen.");
+        System.out.println("🎯 Je hebt " + poort + " Scrum kennis punten nodig om te winnen.");
         Vertraag.inMilliseconden(400);
 
         stelAlleVragen();

@@ -95,7 +95,9 @@ public class KamerFinale extends Kamer {
 
         for (int i = 0; i < vragen.size(); i++) {
             VraagStrategie vraag = vragen.get(i);
-            System.out.println("\n❓ Vraag " + (i+1) + " van " + vragen.size() + ":");
+            CLIFormatter.menuHeader("Finale Vraag " + (i+1) + " van " + vragen.size());
+            CLIFormatter.LijnVoorVraag();
+            System.out.println("❓ Vraag:");
             vraag.toonVraag();
 
             System.out.print("\nJouw antwoord: ");
@@ -110,11 +112,13 @@ public class KamerFinale extends Kamer {
                 speler.verhoogScrumKennis(-50);
                 System.out.println("⬇️ Je verliest 50 Scrum kennis punten. Totaal: " + speler.getScrumKennis());
             }
+            CLIFormatter.LijnNaVraag();
         }
     }
 
     private void controleerWinst() throws SQLException, InterruptedException {
         Speler speler = Spel.getHuidigeSpeler();
+        CLIFormatter.menuHeader("Resultaat");
 
         if (speler.getScrumKennis() >= poort) {
             System.out.println("\n🎉 Gefeliciteerd! Je hebt genoeg Scrum kennis (" + speler.getScrumKennis() +
@@ -139,6 +143,7 @@ public class KamerFinale extends Kamer {
     @Override
     public void betreed() throws SQLException, InterruptedException {
         System.out.println(KamerAsciiLayouts.getFinaleLayout());
+        CLIFormatter.header("Finale Kamer");
         System.out.println("👋 Welkom in de Finale Kamer!");
         Vertraag.inMilliseconden(400);
         System.out.println(beschrijving);

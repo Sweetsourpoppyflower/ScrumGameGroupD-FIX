@@ -8,6 +8,7 @@ public class Eindscherm {
 
     public void rolCredits() throws SQLException, InterruptedException {
         System.out.println(KamerAsciiLayouts.getEindschermLayout());
+        CLIFormatter.header("Einde van het Spel");
         System.out.println("🎬 Mogelijk gemaakt door:");
         Vertraag.inMilliseconden(500);
         System.out.print(Abdul);
@@ -21,7 +22,7 @@ public class Eindscherm {
 
 
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.println("─────────────────────────────────────────────────────");
+        CLIFormatter.menuHeader("Spel Opties");
         System.out.println("1 - 🔄 Start het spel opnieuw");
         System.out.println("2 - 🚪 Sluit het spel af");
         System.out.print("🎮 Kies een optie: ");
@@ -39,5 +40,10 @@ public class Eindscherm {
             System.out.println("⚠️ Ongeldige keuze. Het spel wordt afgesloten.");
             System.exit(0);
         }
+    }
+
+    public static void main(String[] args) throws SQLException, InterruptedException {
+        Eindscherm eindscherm = new Eindscherm();
+        eindscherm.rolCredits();
     }
 }

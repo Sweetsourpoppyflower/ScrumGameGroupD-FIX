@@ -46,7 +46,7 @@ public class Spel {
     // De setKamerVoortgangsMonitor methode stelt de KamerVoortgangsMonitor in die gebruikt wordt om de voortgang van de speler in kamers te monitoren.
     
     public void start() throws SQLException, InterruptedException {
-        System.out.println("Welkom bij " + spelNaam + "!");
+        CLIFormatter.header("Welkom bij " + spelNaam + "!");
         String naam = invoerVerwerker.getPlayerName();
 
         SpelInitiatie spelInitiatie = new SpelInitiatie();
@@ -76,7 +76,7 @@ public class Spel {
 
 
     public void eindig() {
-        System.out.println("Bedankt voor het spelen!");
+        CLIFormatter.header("👋 Bedankt voor het spelen!");
         System.exit(0);
     }
     // De eindig methode sluit het spel af en geeft een bedankbericht weer.

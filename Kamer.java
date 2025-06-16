@@ -30,7 +30,8 @@ public abstract class Kamer implements JokerAcceptor {
     protected void stelVraag() throws SQLException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\n❓ Om de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
+        CLIFormatter.LijnVoorVraag();
+        System.out.println("❓ Om de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
         Vertraag.inMilliseconden(300);
         vraag.toonVraag();
         Vertraag.inMilliseconden(300);
@@ -44,13 +45,15 @@ public abstract class Kamer implements JokerAcceptor {
             if (isCommando(input)) {
                 commandoVerwerker.verwerkCommand(input, Spel.getHuidigeSpeler());
 
-                System.out.println("\n❓ Om de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
+                CLIFormatter.LijnVoorVraag();
+                System.out.println("❓ Om de " + monster.getNaam() + " te verslaan, moet je deze vraag beantwoorden:");
                 vraag.toonVraag();
             } else {
                 isCorrect = vraag.controleerAntwoord(input);
                 if (isCorrect) {
                     System.out.println(vraag.positieveFeedback());
                     monster.versla(Spel.getHuidigeSpeler());
+                    CLIFormatter.LijnNaVraag();
                 } else {
                     System.out.println(vraag.negatieveFeedback());
                     System.out.println("⚔️ De " + monster.getNaam() + " valt opnieuw aan!");

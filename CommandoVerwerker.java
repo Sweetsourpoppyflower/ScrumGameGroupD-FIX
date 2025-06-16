@@ -63,12 +63,14 @@ public class CommandoVerwerker {
 
 
     private void verwerkStatus(Speler speler) {
+        CLIFormatter.menuHeader("Speler Status");
         System.out.println("📍 Je bent nu in kamer: " + speler.getHuidigeKamer());
         System.out.println("ℹ️ Status: " + speler.getStatus());
 
         for (VoortgangsMonitor monitor : speler.getObservers()) {
             System.out.println(monitor.getVoortgangsInfo());
         }
+        Vertraag.inMilliseconden(2500);
     }
     // De verwerkStatus methode toont de huidige status van de speler, inclusief de huidige kamer en andere relevante informatie.
     // Het geeft ook informatie van alle voortgangsmonitors die aan de speler zijn gekoppeld.

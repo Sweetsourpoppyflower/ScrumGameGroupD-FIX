@@ -7,6 +7,7 @@ public class GebruikersInvoerVerwerker {
         if (scanner == null) {
             scanner = new Scanner(System.in);
         }
+        CLIFormatter.menuHeader("Speler Registratie");
         System.out.print("👤 Voer je naam in: ");
         return scanner.nextLine();
     }

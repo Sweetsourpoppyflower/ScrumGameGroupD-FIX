@@ -15,7 +15,8 @@ public class JokerSelector {
     public static void verwerkJokerKeuze(Speler speler) throws InterruptedException {
         GebruikersInvoerVerwerker invoerVerwerker = new GebruikersInvoerVerwerker();
 
-        System.out.println("\n\n🃏 Wil je een HintJoker of een SleutelJoker? (hint/sleutel)");
+        CLIFormatter.menuHeader("Joker Selectie");
+        System.out.println("🃏 Wil je een HintJoker of een SleutelJoker? (hint/sleutel)");
         String jokerKeuze = invoerVerwerker.getJokerChoice().toLowerCase();
 
         if (speler.getJoker() != null) {
